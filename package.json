@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/julkian/gestion-de-tronos-middleware/issues"
   },
-  "homepage": "https://github.com/julkian/gestion-de-tronos-middleware#readme"
+  "homepage": "https://github.com/julkian/gestion-de-tronos-middleware#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.0.1",
+    "mongoose": "^4.5.3",
+    "morgan": "^1.7.0",
+    "underscore": "^1.8.3"
+  }
 }
