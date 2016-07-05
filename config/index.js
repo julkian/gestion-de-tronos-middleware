@@ -9,4 +9,4 @@ function _config(app) {
 
 module.exports = {
     config: _config
-}
+};

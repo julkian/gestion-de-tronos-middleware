@@ -1,9 +1,5 @@
 var router = require('express').Router();
 
-router.get('/me', function (req, res) {
-    res.send('getting me');
-});
-
 router.post('/login', function (req, res) {
     res.send('login');
 });

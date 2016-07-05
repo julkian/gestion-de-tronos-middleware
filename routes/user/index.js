@@ -1,5 +1,9 @@
 var router = require('express').Router();
 
+router.get('/me', function (req, res) {
+    res.send('getting me');
+});
+
 router.get('/users', function (req, res) {
     res.send('getting users');
 });
