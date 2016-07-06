@@ -3,22 +3,25 @@ var Deferred = require('promised-io').Deferred;
 var serverConstants = require('../constants/application');
 var _ = require('underscore');
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
 var _createUser = function (_user) {
     'use strict';
     var deferred = new Deferred();
-    
-    var user = new User({
-        username: _user.username,
-        password: _user.password
-    });
 
-    user.save(function (error, user) {
-        if (error) {
-            deferred.reject(serverConstants.CODE['500']);
-        } else {
-            deferred.resolve(user);
-        }
+    bcrypt.hash(_user.password, null, null, function(err, passHash) {
+        var user = new User({
+            username: _user.username,
+            password: passHash
+        });
+
+        user.save(function (error, user) {
+            if (error) {
+                deferred.reject(serverConstants.CODE['500']);
+            } else {
+                deferred.resolve(user);
+            }
+        });
     });
     
     return deferred.promise;
