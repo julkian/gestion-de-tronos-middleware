@@ -7,5 +7,6 @@ module.exports = {
         404: {status: 404, message: 'Page not found'},
         500: {status: 500, message: 'server internal error'}
     },
-    TOKEN_EXPIRES: 3153600000000 // 10 years
+    TOKEN_EXPIRES: 3153600000000, // 10 years
+    MONGO_IP: 'mongodb://localhost/gestiondetronos'
 };

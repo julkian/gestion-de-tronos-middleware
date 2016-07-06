@@ -1,6 +1,6 @@
 module.exports = {
     HOUSES: {
-        1: { COST: 100, GOLD_RATE: 2 },
+        1: { COST: 0, GOLD_RATE: 2 },
         2: { COST: 250, GOLD_RATE: 4 },
         3: { COST: 550, GOLD_RATE: 6 },
         4: { COST: 1250, GOLD_RATE: 8 },
