@@ -11,18 +11,25 @@ router.get('/users', function (req, res) {
         res.json({status:200, message: users});
     }, function (error) {
         res.status(error.status).send(error);
-    })
+    });
 });
 
 router.post('/register', function (req, res) {
-    userImpl.createUser(req.body).then(function () {
-        res.json({status: 200, message: 'user created successfully'});
+    userImpl.createUser(req.body).then(function (user) {
+        res.json({status: 200, message: user});
     }, function (error) {
         res.status(error.status).send(error);
     });
 });
 
 router.route('/user/:userId')
+    .get(function (req, res) {
+        userImpl.getUser(req.params.userId).then(function(user) {
+            res.json({status:200, message: user});
+        }, function (error) {
+            res.status(error.status).send(error);
+        });
+    })
     .put(function (req, res) {
         userImpl.modifyUser(req.params.userId, req.body).then(function () {
             res.json(serverConstants.CODE['200']);

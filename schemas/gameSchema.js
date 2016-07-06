@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var gameSchema = new Schema({
     totalGold: {type: Number, default: 0},
     goldRate: {type: Number, default: 1},
-    soldiers: Number,
+    soldiers: {type: Number, default: 0},
     houseName: String,
     Buildings: [],
     familiesDefeated: []

@@ -13,14 +13,29 @@ var _createUser = function (_user) {
         password: _user.password
     });
 
-    user.save(function (error) {
+    user.save(function (error, user) {
         if (error) {
             deferred.reject(serverConstants.CODE['500']);
         } else {
-            deferred.resolve();
+            deferred.resolve(user);
         }
     });
     
+    return deferred.promise;
+};
+
+var _getUser = function (userId) {
+    'use strict';
+    var deferred = new Deferred();
+
+    User.findById(userId,function(error, user) {
+        if(error) {
+            deferred.reject(serverConstants.CODE['500']);
+        } else {
+            deferred.resolve(user);
+        }
+    });
+
     return deferred.promise;
 };
 
@@ -37,7 +52,6 @@ var _getUsers = function() {
     });
 
     return deferred.promise;
-
 };
 
 var _modifyUser = function (userId, _user) {
@@ -94,6 +108,7 @@ var _removeUser = function (userId) {
 module.exports = {
     createUser: _createUser,
     getUsers: _getUsers,
+    getUser: _getUser,
     modifyUser: _modifyUser,
     removeUser: _removeUser
 };
