@@ -13,7 +13,11 @@ router.use("/me", function (req, res, next) {
 });
 
 router.get('/me', function (req, res) {
-    res.send('getting me');
+    userImpl.getUser(req.userId).then(function(user) {
+        res.json({status:200, message: user});
+    }, function (error) {
+        res.status(error.status).send(error);
+    });
 });
 
 router.use("/users", function (req, res, next) {
