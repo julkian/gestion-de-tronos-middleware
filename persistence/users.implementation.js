@@ -1,4 +1,5 @@
 var User = require('../schemas/userSchema');
+var Game = require('../schemas/gameSchema');
 var Deferred = require('promised-io').Deferred;
 var serverConstants = require('../constants/application');
 var _ = require('underscore');
@@ -96,13 +97,29 @@ var _removeUser = function (userId) {
         } else if(user === null) {
             deferred.reject(serverConstants.CODE['500']);
         } else  {
-            User.remove({_id: mongoose.Types.ObjectId(userId)}, function (error, idUserRemoved) {
-                if (error) {
-                    deferred.reject(serverConstants.CODE['500']);
-                } else {
-                    deferred.resolve(idUserRemoved);
-                }
-            });
+            if (user.gameId) {
+                Game.remove({_id: user.gameId}, function (error) {
+                    if (error) {
+                        deferred.reject(serverConstants.CODE['500']);
+                    } else {
+                        User.remove({_id: mongoose.Types.ObjectId(userId)}, function (error, idUserRemoved) {
+                            if (error) {
+                                deferred.reject(serverConstants.CODE['500']);
+                            } else {
+                                deferred.resolve(idUserRemoved);
+                            }
+                        });
+                    }
+                });
+            } else {
+                User.remove({_id: mongoose.Types.ObjectId(userId)}, function (error, idUserRemoved) {
+                    if (error) {
+                        deferred.reject(serverConstants.CODE['500']);
+                    } else {
+                        deferred.resolve(idUserRemoved);
+                    }
+                });
+            }
         }
     });
     return deferred.promise;
