@@ -9,8 +9,4 @@ router.post('/login', function (req, res) {
     })
 });
 
-router.post('/logout', function (req, res) {
-    res.send('logout');
-});
-
 module.exports = router;

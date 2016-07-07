@@ -1,9 +1,28 @@
 var router = require('express').Router();
 var userImpl = require('../../implementation/users.implementation');
 var serverConstants = require('../../constants/application');
+var authImpl = require('../../implementation/auth.implementation');
+
+router.use("/me", function (req, res, next) {
+    authImpl.verify(req).then(function (newReq) {
+        req = newReq;
+        next();
+    }, function (error) {
+        res.status(error.status).send(error);
+    });
+});
 
 router.get('/me', function (req, res) {
     res.send('getting me');
+});
+
+router.use("/users", function (req, res, next) {
+    authImpl.verify(req).then(function (newReq) {
+        req = newReq;
+        next();
+    }, function (error) {
+        res.status(error.status).send(error);
+    });
 });
 
 router.get('/users', function (req, res) {
@@ -17,6 +36,15 @@ router.get('/users', function (req, res) {
 router.post('/register', function (req, res) {
     userImpl.createUser(req.body).then(function (user) {
         res.json({status: 200, message: user});
+    }, function (error) {
+        res.status(error.status).send(error);
+    });
+});
+
+router.use("/user", function (req, res, next) {
+    authImpl.verify(req).then(function (newReq) {
+        req = newReq;
+        next();
     }, function (error) {
         res.status(error.status).send(error);
     });

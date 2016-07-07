@@ -30,15 +30,20 @@ var _login = function (userData) {
 
 var _verify = function (req) {
     var deferred = new Deferred();
-    var token = req.headers.authorization.split(' ')[1];
-    jwt.verify(token, serverConstants.SECRET, function (err, decoded) {
-        if (err) {
-            deferred.reject({status: 500, message: "token not valid"});
-        } else {
-            req.userId = decoded.userId;
-            deferred.resolve(req);
-        }
-    });
+    if (req.headers.authorization) {
+        var token = req.headers.authorization.split(' ')[1];
+        jwt.verify(token, serverConstants.SECRET, function (err, decoded) {
+            if (err) {
+                deferred.reject({status: 500, message: "token not valid"});
+            } else {
+                req.userId = decoded.userId;
+                deferred.resolve(req);
+            }
+        });
+    } else {
+        deferred.reject({status: 500, message:"not token provided"})
+    }
+
     return deferred.promise;
 };
 
