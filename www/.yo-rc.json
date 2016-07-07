@@ -1,0 +1,11 @@
+{
+  "generator-angulpify": {
+    "projectName": "gestion de tronos",
+    "coffee": false,
+    "jade": false,
+    "sass": false,
+    "bootstrap": false,
+    "uiBootstrap": false,
+    "uiRouter": true
+  }
+}
