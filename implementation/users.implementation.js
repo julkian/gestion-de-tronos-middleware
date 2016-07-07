@@ -10,19 +10,30 @@ var _createUser = function (_user) {
     'use strict';
     var deferred = new Deferred();
 
-    bcrypt.hash(_user.password, null, null, function(err, passHash) {
-        var user = new User({
-            username: _user.username,
-            password: passHash
-        });
+    User.find({username: _user.username}, function (error, result) {
+        if (error) {
+            deferred.reject(serverConstants.CODE['500']);
+        } else if (result.length) {
+            deferred.reject({status: 500, message:"username already in use"});
+        } else {
+            bcrypt.hash(_user.password, null, null, function(err, passHash) {
+                var user = new User({
+                    username: _user.username,
+                    password: passHash
+                });
 
-        user.save(function (error, user) {
-            if (error) {
-                deferred.reject(serverConstants.CODE['500']);
-            } else {
-                deferred.resolve(user);
-            }
-        });
+                user.save(function (error, user) {
+                    if (error) {
+                        deferred.reject(serverConstants.CODE['500']);
+                    } else {
+                        deferred.resolve({
+                            _id: user._id,
+                            username: user.username
+                        });
+                    }
+                });
+            });
+        }
     });
     
     return deferred.promise;
@@ -32,8 +43,8 @@ var _getUser = function (userId) {
     'use strict';
     var deferred = new Deferred();
 
-    User.findById(userId,function(error, user) {
-        if(error) {
+    User.findById(userId, {username:1, gameId: 1},function(error, user) {
+        if(error || !user) {
             deferred.reject(serverConstants.CODE['500']);
         } else {
             deferred.resolve(user);
@@ -80,7 +91,7 @@ var _modifyUser = function (userId, _user) {
                 if (error) {
                     deferred.reject(serverConstants.CODE['500']);
                 } else {
-                    deferred.resolve(userUpdated);
+                    deferred.resolve(userUpdated._id);
                 }
             });
         }

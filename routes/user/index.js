@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var userImpl = require('../../persistence/users.implementation');
+var userImpl = require('../../implementation/users.implementation');
 var serverConstants = require('../../constants/application');
 
 router.get('/me', function (req, res) {

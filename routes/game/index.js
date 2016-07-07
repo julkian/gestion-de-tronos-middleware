@@ -1,6 +1,16 @@
 var router = require('express').Router();
-var gameImpl = require('../../persistence/games.implementation');
+var gameImpl = require('../../implementation/games.implementation');
 var serverConstants = require('../../constants/application');
+var authImpl = require('../../implementation/auth.implementation');
+
+router.use("/game", function (req, res, next) {
+    authImpl.verify(req).then(function (newReq) {
+        req = newReq;
+        next();
+    }, function (error) {
+        res.status(error.status).send(error);
+    });
+});
 
 router.route('/game/:gameId')
     .get(function (req, res) {

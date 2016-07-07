@@ -66,7 +66,7 @@ var _modifyGame = function (gameId, _game) {
                 if (error) {
                     deferred.reject(serverConstants.CODE['500']);
                 } else {
-                    deferred.resolve(gameUpdated);
+                    deferred.resolve(gameUpdated._id);
                 }
             });
         }
