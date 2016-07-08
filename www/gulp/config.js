@@ -10,7 +10,7 @@ global.config = {
       assets: [SRC_FOLDER + '/assets/**/*', '!' + SRC_FOLDER + '/assets/images/**/*'],
       images: SRC_FOLDER + '/assets/images/**/*',
       scripts: SRC_FOLDER + '/modules/**/*.js',
-      styles: SRC_FOLDER + '/styles/app.css',
+      styles: [SRC_FOLDER + '/styles/app.css', SRC_FOLDER + '/../bower_components/angular-material/angular-material.css'],
       stylesGlob: SRC_FOLDER + '/styles/**/*.css',
       templates: SRC_FOLDER + '/modules/**/*.html',
       templatesHTML: SRC_FOLDER + '/modules/**/*.html',
@@ -56,7 +56,7 @@ global.config = {
     }
   },
   ports: {
-    staticServer: 8080,
+    staticServer: 9000,
     livereloadServer: 35729
   }
 };
