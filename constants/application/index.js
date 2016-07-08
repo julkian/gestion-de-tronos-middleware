@@ -1,5 +1,5 @@
 module.exports = {
-    SERVER_PORT: 8080,
+    SERVER_PORT: 9000,
     SERVER_IP: 'localhost',
     SECRET: 'someSecret',
     CODE: {

@@ -5,10 +5,12 @@ module.exports =
     //load your foo submodules here, e.g.:
     //require('./bar').name
   ])
-  .config(function ($stateProvider) {
+
+  .config(function ($stateProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $stateProvider
     .state('foo', {
-      url: '',
+      url: '/cosa',
       templateUrl: 'app/foo/layout.html',
       controller: 'fooController'
     });
