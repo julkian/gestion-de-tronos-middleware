@@ -12,19 +12,8 @@ module.exports =
     require('../components').name,
     //example app module:
     require('./home').name
-    //load extra app modules here, e.g.:
-    //require('./frontend').name,
-    //require('./admin').name
+
   ])
     .config(require('./app.config'))
     .config(require('./app.config.routes'))
-  /*.config(function ($stateProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
-    $stateProvider
-      .state('home', {
-        url: '/home',
-        templateUrl: 'app/home/layout.html',
-        controller: 'homeController'
-      });
-  })*/
-  .controller('appController', require('./appController'));
+    .controller('appController', require('./appController'));
