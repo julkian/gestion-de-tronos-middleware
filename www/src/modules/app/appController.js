@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function fooController($scope) {
+  function appController($scope) {
     $scope.welcome = 'Congratulations!';
     $scope.title = 'Texto ejemplo';
   };

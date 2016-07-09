@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports =
-  angular.module('gestion de tronos.common', [
+  angular.module('app.component', [
     require('./directives').name,
     require('./filters').name,
     require('./services').name

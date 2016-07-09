@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports =
-  angular.module('gestion de tronos.common.filters', []);
+  angular.module('app.component.filters', []);
   //.filter('fooFilter', require('./fooFilter'));

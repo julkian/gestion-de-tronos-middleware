@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports =
-  angular.module('gestion de tronos.common.services', []);
+  angular.module('app.component.services', []);
   //.factory('fooService', require('./fooService'));

@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports =
-  angular.module('gestion de tronos.common.directives', []);
+  angular.module('app.component.directives', []);
   //.directive('fooDirective', require('./fooDirective'));
