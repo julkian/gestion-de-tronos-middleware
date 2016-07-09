@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports =
-  angular.module('gestion de tronos', [
+  angular.module('app', [
     'ui.router',
     //load extra external dependencies here, e.g.:
     //'ngAnimate',

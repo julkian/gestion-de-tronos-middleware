@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports =
-  angular.module('gestion de tronos.foo', [
+  angular.module('app.foo', [
     //load your foo submodules here, e.g.:
     //require('./bar').name
   ])
