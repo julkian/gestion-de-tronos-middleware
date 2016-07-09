@@ -16,4 +16,4 @@ module.exports =
   ])
     .config(require('./app.config'))
     .config(require('./app.config.routes'))
-    .controller('appController', require('./appController'));
+    .controller('appController', require('./app.controller'));
