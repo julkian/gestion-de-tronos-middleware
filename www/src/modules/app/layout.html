@@ -1,10 +1,14 @@
-<div flex="100" layout="column" layout-align="center center">
-  <a href="https://github.com/jgoux/generator-angulpify" title="Yeoman Angulpify Generator">
-    <img class="md-card-image" src="assets/images/angulpify.png">
-  </a>
-  <h1>{{welcome}}</h1>
-    <md-input-container>
-        <label>Ejemplo</label>
-        <input type="text" ng-model="title">
-    </md-input-container>
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left">
+  <md-toolbar class="md-hue-1 md-whiteframe-z2">
+    <md-button aria-label="close" layout="row" layout-align="center center" class="md-toolbar-tools md-warn" ui-sref="#">
+      <img flex="80" src="">
+    </md-button>
+  </md-toolbar>
+</md-sidenav>
+
+<div layout="column" flex>
+  <md-toolbar layout="row" layout-align="end center"></md-toolbar>
+  <md-content flex class="md-padding page-content">
+    <div ui-view></div>
+  </md-content>
 </div>

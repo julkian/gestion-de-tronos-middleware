@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports =
-  angular.module('app')
-    .controller('appController', require('./homeController'));
+  angular.module('app.home',  [])
+    .controller('homeController', require('./homeController'));

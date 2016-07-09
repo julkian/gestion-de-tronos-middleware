@@ -1,18 +1,21 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-function routesConfig($stateProvider) {
+function routesConfig($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/home');
     $stateProvider
       .state('app', {
         url: '',
         abstract: true,
         templateUrl: 'app/layout.html',
-        controller: 'appController'
+        controller: 'appController',
+        controllerAs: 'app'
       })
 
       .state('app.home', {
         url: '/home',
         templateUrl: 'app/home/home.html',
-        controller: 'homeController'
+        controller: 'homeController',
+        controllerAs: 'home'
       });
   };
