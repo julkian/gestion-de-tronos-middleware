@@ -10,3 +10,9 @@ require('angular-material');
 
 //app entry point
 require('./app');
+
+//exporting services
+module.exports =
+    angular.module('app.component', [
+        require('./services').name
+    ]);
