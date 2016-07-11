@@ -5,21 +5,42 @@
             restrict: 'E',
             controller: HousesController,
             controllerAs: 'Houses',
-            templateUrl: './houses.html',
-            bindToController: {}
+            templateUrl: 'houses.html',
+            bindToController: {
+                goldRate: '='
+            }
         };
     }
 
     HousesController.$inject = ['$scope', '$timeout'];
     function HousesController ($scope, $timeout) {
         var vm = this;
+        var data;
 
         initialize();
 
         /////////////////////
 
         function initialize() {
-            console.log('wtf');
+            data = _mockData();
+        }
+
+        function _mockData() {
+            return {
+                user: {
+                    "_id": "5783d2eb452031dc1fdd7fed",
+                    "houseName": "Pereanster",
+                    "familiesDefeated": [],
+                    "Buildings": [],
+                    "soldiers": 0,
+                    "goldRate": 1,
+                    "totalGold": 0
+                },
+                game: {
+                    COST: 0,
+                    GOLD_RATE: 2
+                }
+            };
         }
     }
 
