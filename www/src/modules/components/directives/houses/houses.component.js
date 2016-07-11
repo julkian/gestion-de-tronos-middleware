@@ -1,19 +1,26 @@
 'use strict';
 
-module.exports = /*@ngInject*/
-    function houses(/* inject dependencies here, i.e. : $rootScope */) {
+    function housesDirective(/* inject dependencies here, i.e. : $rootScope */) {
         return {
             restrict: 'E',
-            templateUrl: 'houses.html',
-            controllerAs: 'Houses',
             controller: HousesController,
-            bindToController: {
-
-            }
+            controllerAs: 'Houses',
+            templateUrl: './houses.html',
+            bindToController: {}
         };
-    };
-
-    HousesController.$inject = ['$scope'];
-    function HousesController ($scope) {
-        var vm = this;
     }
+
+    HousesController.$inject = ['$scope', '$timeout'];
+    function HousesController ($scope, $timeout) {
+        var vm = this;
+
+        initialize();
+
+        /////////////////////
+
+        function initialize() {
+            console.log('wtf');
+        }
+    }
+
+module.exports = housesDirective;
