@@ -1,11 +1,24 @@
 <div flex="100" layout="column" layout-align="center center">
-    <a href="https://github.com/jgoux/generator-angulpify" title="Yeoman Angulpify Generator">
-        <img class="md-card-image" src="assets/images/angulpify.png">
-    </a>
-    <h1>{{home.welcome}}</h1>
-    <md-input-container>
-        <label>Ejemplo</label>
-        <input type="text" ng-model="home.title">
-    </md-input-container>
-    <gt-houses goldRate="goldRate"></gt-houses>
+    <h1>Gestion de Tronos</h1>
+    <h2>Hold the Gold</h2>
+    <p>Gold: {{home.data.game.totalGold}}</p>
+    <div flex layout="row">
+        <gt-houses
+                houses-level="home.data.game.buildings.houses">
+        </gt-houses>
+        <gt-houses
+                houses-level="home.data.game.buildings.houses">
+        </gt-houses>
+    </div>
+    <div flex layout="row">
+        <gt-houses
+                houses-level="home.data.game.buildings.houses">
+        </gt-houses>
+        <gt-houses
+                houses-level="home.data.game.buildings.houses">
+        </gt-houses>
+        <gt-houses
+                houses-level="home.data.game.buildings.houses">
+        </gt-houses>
+    </div>
 </div>
