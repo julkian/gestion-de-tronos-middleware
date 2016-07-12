@@ -5,7 +5,7 @@
             restrict: 'E',
             controller: HousesController,
             controllerAs: 'Houses',
-            templateUrl: 'houses.html',
+            templateUrl: 'directives/houses/houses.html',
             bindToController: {
                 goldRate: '='
             }
