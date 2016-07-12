@@ -3,7 +3,6 @@
 module.exports = /*@ngInject*/
     function homeController($scope, $interval) {
         var vm = this;
-        var _intervalGoldPromise = null;
         vm.data = null;
 
 
@@ -13,13 +12,6 @@ module.exports = /*@ngInject*/
 
         function _initialize() {
             vm.data = _mockData();
-            _startGoldInterval();
-        }
-
-        function _startGoldInterval() {
-            _intervalGoldPromise = $interval(function () {
-                vm.data.game.totalGold += vm.data.game.goldRate;
-            }, 1000);
         }
 
         function _mockData() {

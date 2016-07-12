@@ -4,7 +4,7 @@
         return {
             restrict: 'E',
             bindToController: {
-                housesLevel: '='
+                gameData: '='
             },
             controller: HousesController,
             controllerAs: 'houses',
@@ -12,10 +12,11 @@
         };
     }
 
-    HousesController.$inject = ['$scope', '$interval'];
-    function HousesController ($scope, $interval) {
+    HousesController.$inject = ['$scope', '$interval', '$timeout'];
+    function HousesController ($scope, $interval, $timeout) {
         var vm = this;
         var housesLevels = null;
+        var _intervalGoldPromise = null;
         vm.levelUpHouses = _levelUpHouses;
 
         initialize();
@@ -33,6 +34,12 @@
                     GOLD_RATE: 4
                 }
             };
+        }
+
+        function _startGoldInterval() {
+            _intervalGoldPromise = $interval(function () {
+                vm.data.totalGold += vm.data.goldRate;
+            }, 1000);
         }
 
         function _levelUpHouses() {
