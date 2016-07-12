@@ -14,5 +14,6 @@ require('./app');
 //exporting services
 module.exports =
     angular.module('app.component', [
+        require('./directives').name,
         require('./services').name
     ]);
