@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports =
-  angular.module('app', [
+    angular.module('app', [
         'ui.router',
         //load extra external dependencies here, e.g.:
         //'ngAnimate',
@@ -12,7 +12,8 @@ module.exports =
         require('../services').name,
         require('./home').name
 
-  ])
-    .config(require('./app.config'))
-    .config(require('./app.config.routes'))
-    .controller('appController', require('./app.controller'));
+    ])
+        .config(require('./app.config'))
+        .config(require('./app.config.routes'))
+        .constant('$gameConstants', require('./app.constants'))
+        .controller('appController', require('./app.controller'));

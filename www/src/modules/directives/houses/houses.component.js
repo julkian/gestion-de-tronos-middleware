@@ -3,45 +3,44 @@
     function housesDirective(/* inject dependencies here, i.e. : $rootScope */) {
         return {
             restrict: 'E',
+            bindToController: {},
             controller: HousesController,
-            controllerAs: 'Houses',
-            templateUrl: 'directives/houses/houses.html',
-            bindToController: {
-                goldRate: '='
-            }
+            controllerAs: 'houses',
+            templateUrl: 'directives/houses/houses.html'
         };
     }
 
-    HousesController.$inject = ['$scope', '$timeout'];
-    function HousesController ($scope, $timeout) {
+    HousesController.$inject = ['$scope', '$interval', '$gameConstants'];
+    function HousesController ($rootScope, $interval, $gameConstants) {
         var vm = this;
-        var data;
+        var _intervalGoldPromise = null;
+        vm.housesCost = null;
+        vm.levelUpHouses = _levelUpHouses;
 
         initialize();
 
         /////////////////////
 
         function initialize() {
-            data = _mockData();
+            vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].COST;
+            _startGoldInterval();
         }
 
-        function _mockData() {
-            return {
-                user: {
-                    "_id": "5783d2eb452031dc1fdd7fed",
-                    "houseName": "Pereanster",
-                    "familiesDefeated": [],
-                    "Buildings": [],
-                    "soldiers": 0,
-                    "goldRate": 1,
-                    "totalGold": 0
-                },
-                game: {
-                    COST: 0,
-                    GOLD_RATE: 2
-                }
-            };
+        function _startGoldInterval() {
+            _intervalGoldPromise = $interval(function () {
+                $rootScope.game.totalGold += $rootScope.game.goldRate;
+            }, 1000);
         }
+
+        function _levelUpHouses() {
+            var maxLevel = Object.keys($gameConstants.HOUSES).length;
+            if ($rootScope.game.buildings.houses <= maxLevel) {
+                $rootScope.game.totalGold -= vm.housesCost;
+                $rootScope.game.buildings.houses++;
+                vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].COST;
+            }
+        }
+
     }
 
 module.exports = housesDirective;
