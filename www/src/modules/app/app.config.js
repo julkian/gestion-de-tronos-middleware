@@ -5,25 +5,6 @@ module.exports = /*@ngInject*/
     $locationProvider.html5Mode(true);
 
     // AUTH
-    function skipIfLoggedIn($q, $auth) {
-      var deferred = $q.defer();
-      if ($auth.isAuthenticated()) {
-        deferred.reject();
-      } else {
-        deferred.resolve();
-      }
-      return deferred.promise;
-    }
-
-    function loginRequired($q, $location, $auth) {
-      var deferred = $q.defer();
-      if ($auth.isAuthenticated()) {
-        deferred.resolve();
-      } else {
-        $location.path('/login');
-      }
-      return deferred.promise;
-    }
     $authProvider.withCredentials = true;
     $authProvider.baseUrl = 'http://localhost:8080' || '';
     $authProvider.loginUrl = '/rest/auth/login';
