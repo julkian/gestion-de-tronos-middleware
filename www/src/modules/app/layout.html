@@ -1,14 +1,48 @@
-<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left">
+<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left" style="max-width: 200px;">
   <md-toolbar class="md-hue-1 md-whiteframe-z2">
-    <md-button aria-label="close" layout="row" layout-align="center center" class="md-toolbar-tools md-warn" ui-sref="#">
-      <img flex="80" src="">
+    <md-button aria-label="close" layout="row" layout-align="center center" class="md-toolbar-tools md-warn" ui-sref=".home">
     </md-button>
   </md-toolbar>
+  <md-button aria-label="false" ng-repeat="item in app.menuItems" layout="column" layout-align="center center"
+             flex class="capitalize" ng-click="app.selectItem(item)"
+             ui-sref-active="md-warn" ui-sref="{{item.sref}}">
+    <div hide-sm hide-md class="md-tile-content">
+      <i class="material-icons md-36">{{item.icon}}</i>
+    </div>
+    <div class="md-tile-content">
+      {{item.name}}
+    </div>
+  </md-button>
+  <md-divider ng-repeat-end></md-divider>
 </md-sidenav>
 
 <div layout="column" flex>
-  <md-toolbar layout="row" layout-align="end center"></md-toolbar>
+  <md-toolbar layout="row" layout-align="end center">
+    <md-button layout="row" layout-align="center center" hide-sm class="toolbar-button" aria-label="Settings" ng-click="app.toggleRightSidebar()">
+      <i class="material-icons">menu</i>
+    </md-button>
+    <md-button layout="row" layout-align="center center" hide-gt-sm ng-click="app.toggleItemsList()" aria-label="Menu">
+      <i class="material-icons">menu</i>
+    </md-button>
+  </md-toolbar>
   <md-content flex class="md-padding page-content">
     <div ui-view></div>
   </md-content>
 </div>
+
+<md-sidenav md-component-id="right" class="md-whiteframe-z2 md-sidenav-right">
+  <md-toolbar>
+    <md-toolbar class="md-warn" layout="row" layout-align="center center">
+      <i flex="20" layout="row" layout-align="end center"class="material-icons md-36">supervisor_account</i>
+      <md-menu md-offset="0 20">
+        <md-button layout="row" layout-align="center center" class="capitalize" ng-click="$mdOpenMenu()" aria-label="Open menu">
+          <span>{{app.currentUserName}}</span>
+          <i class="material-icons">keyboard_arrow_down</i>
+        </md-button>
+        <md-menu-content width="3">
+          <md-menu-item><md-button ng-click="app.logout()">Log out</md-button></md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-toolbar>
+  </md-toolbar>
+</md-sidenav>

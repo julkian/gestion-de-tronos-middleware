@@ -20,7 +20,7 @@ var _login = function (userData) {
                     deferred.reject({status: 500, message: "wrong password"});
                 } else {
                     var token = jwt.sign({userId: user._id, isRevoked: false}, serverConstants.SECRET);
-                    deferred.resolve('bearer ' + token);
+                    deferred.resolve(token);
                 }
             });
         }
