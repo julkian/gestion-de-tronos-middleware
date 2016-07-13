@@ -1,18 +1,5 @@
-body {
-  text-align: center;
-  color: #222;
-}
-
-.welcome {
-  width: 300px;
-  height: 510px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -150px;
-  margin-top: -255px;
-}
-
-a, a:visited {
-  text-decoration: none;
+md-sidenav.md-locked-open.md-sidenav-left {
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
 }

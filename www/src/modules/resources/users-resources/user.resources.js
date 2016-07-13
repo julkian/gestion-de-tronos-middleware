@@ -39,7 +39,7 @@ function createUserProvider() {
         }
       };
       return $resource(baseUrl + serviceBaseUrl, null, actions);
-    }
+    };
 }
 
 
