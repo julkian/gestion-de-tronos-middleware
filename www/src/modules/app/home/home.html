@@ -1,8 +1,15 @@
 <div layout="row">
     <div flex="75" layout="column" layout-align="center center">
-        <h1>Gestion de Tronos</h1>
-        <h2>Hold the Gold {{game.houseName}}</h2>
-        <p>Gold: {{game.totalGold}}</p>
+        <div style="background-color: #f6dd8e" layout="row" layout-align="space-around center">
+            <div layout="column">
+                <h1>Gestion de Tronos</h1>
+                <h2>Hold the Gold {{game.houseName}}</h2>
+            </div>
+            <div layout="column">
+                <p>Gold: {{game.totalGold}}</p>
+                <p>Soldiers: {{game.soldiers}}</p>
+            </div>
+        </div>
         <div layout="row">
             <div layout="column" flex="50">
                 <gt-houses>
