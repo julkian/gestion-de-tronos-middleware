@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function config($locationProvider, $authProvider, $httpProvider) {
+  function config($locationProvider, $authProvider, $httpProvider, userMeProvider) {
     $locationProvider.html5Mode(true);
 
     // AUTH
@@ -18,4 +18,6 @@ module.exports = /*@ngInject*/
     var restConfig = {
       baseUrl: "http://localhost:8080" || ''
     };
+
+    userMeProvider.config(restConfig);
   };
