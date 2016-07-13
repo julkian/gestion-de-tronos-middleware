@@ -7,6 +7,7 @@ require('angular-animate');
 require('angular-aria');
 require('angular-messages');
 require('angular-material');
+require('satellizer');
 
 //app entry point
 require('./app');

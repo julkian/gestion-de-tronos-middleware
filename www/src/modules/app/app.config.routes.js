@@ -3,7 +3,15 @@
 module.exports = /*@ngInject*/
 function routesConfig($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
+  
     $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'app/login/login.html',
+        controller: 'loginController',
+        controllerAs: 'login'
+      })
+
       .state('app', {
         url: '',
         abstract: true,
