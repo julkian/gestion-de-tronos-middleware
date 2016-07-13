@@ -1,15 +1,30 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function loginController($auth, $scope, userMe, $state) {
+  function loginController($auth, $state, $mdDialog, $mdToast) {
     var vm = this;
 
     vm.doLogin = function () {
       $auth.login(vm.user)
         .then(function () {
-          userMe.me().$promise.then(function (data) {
-            $state.go('app.home');
-          });
+          $state.go('app.home');
+        }, function () {
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent('Internal Server Error')
+              .position('top right')
+              .hideDelay(3000)
+          );
         });
+    };
+
+    vm.doRegistration = function () {
+      $mdDialog.show({
+        templateUrl: 'app/login/registration-user/registrationUser.html',
+        clickOutsideToClose: false,
+        disableParentScroll: true,
+        controller: 'registrationController',
+        controllerAs: 'registration'
+      });
     };
   };
