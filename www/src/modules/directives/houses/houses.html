@@ -2,7 +2,7 @@
     <md-card-title>
         <md-card-title-text>
             <span class="md-headline">Houses</span>
-            <span class="md-subhead">Level: {{houses.housesLevel}}</span>
+            <span class="md-subhead">Level: {{game.buildings.houses}}</span>
         </md-card-title-text>
         <md-card-title-media>
             <div class="md-media-lg card-media">
@@ -16,9 +16,10 @@
     <md-card-actions layout="row" layout-align="end center">
         <md-button
             md-no-ink
+            ng-disabled="game.totalGold < houses.housesCost"
             class="md-primary md-raised"
             ng-click="houses.levelUpHouses()">
-            lvl up (cost {{houses.houseLevel.COST}})
+            lvl up (cost {{houses.housesCost}})
         </md-button>
     </md-card-actions>
 </md-card>

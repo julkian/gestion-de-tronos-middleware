@@ -1,11 +1,12 @@
 <div flex="100" layout="column" layout-align="center center">
     <h1>Gestion de Tronos</h1>
-    <h2>Hold the Gold</h2>
-    <p>Gold: {{home.data.game.totalGold}}</p>
+    <h2>Hold the Gold {{game.houseName}}</h2>
+    <p>Gold: {{game.totalGold}}</p>
     <div flex layout="row">
-        <gt-houses
-                houses-level="home.data.game">
-        </gt-houses>
+        <div layout="column" flex="50">
+            <gt-houses>
+            </gt-houses>
+        </div>
         <div flex="50">
             another building
         </div>

@@ -3,20 +3,18 @@
     function housesDirective(/* inject dependencies here, i.e. : $rootScope */) {
         return {
             restrict: 'E',
-            bindToController: {
-                gameData: '='
-            },
+            bindToController: {},
             controller: HousesController,
             controllerAs: 'houses',
             templateUrl: 'directives/houses/houses.html'
         };
     }
 
-    HousesController.$inject = ['$scope', '$interval', '$timeout'];
-    function HousesController ($scope, $interval, $timeout) {
+    HousesController.$inject = ['$scope', '$interval', '$gameConstants'];
+    function HousesController ($rootScope, $interval, $gameConstants) {
         var vm = this;
-        var housesLevels = null;
         var _intervalGoldPromise = null;
+        vm.housesCost = null;
         vm.levelUpHouses = _levelUpHouses;
 
         initialize();
@@ -24,26 +22,23 @@
         /////////////////////
 
         function initialize() {
-            housesLevels = {
-                1: {
-                    COST: 10,
-                    GOLD_RATE: 2
-                },
-                2: {
-                    COST: 50,
-                    GOLD_RATE: 4
-                }
-            };
+            vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].COST;
+            _startGoldInterval();
         }
 
         function _startGoldInterval() {
             _intervalGoldPromise = $interval(function () {
-                vm.data.totalGold += vm.data.goldRate;
+                $rootScope.game.totalGold += $rootScope.game.goldRate;
             }, 1000);
         }
 
         function _levelUpHouses() {
-
+            var maxLevel = Object.keys($gameConstants.HOUSES).length;
+            if ($rootScope.game.buildings.houses <= maxLevel) {
+                $rootScope.game.totalGold -= vm.housesCost;
+                $rootScope.game.buildings.houses++;
+                vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].COST;
+            }
         }
 
     }

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-    function homeController($scope, $interval) {
+    function homeController($rootScope) {
         var vm = this;
         vm.data = null;
 
@@ -11,7 +11,10 @@ module.exports = /*@ngInject*/
         /////////////////////
 
         function _initialize() {
-            vm.data = _mockData();
+            var data = _mockData();
+            $rootScope.user = data.user;
+            $rootScope.game = data.game;
+            vm.totalGold = $rootScope.game.totalGold;
         }
 
         function _mockData() {
