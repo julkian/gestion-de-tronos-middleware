@@ -37,6 +37,7 @@
             if ($rootScope.game.buildings.houses <= maxLevel) {
                 $rootScope.game.totalGold -= vm.housesCost;
                 $rootScope.game.buildings.houses++;
+                $rootScope.game.goldRate = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].GOLD_RATE;
                 vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].COST;
             }
         }
