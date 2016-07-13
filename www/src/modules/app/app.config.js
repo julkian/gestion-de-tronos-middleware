@@ -1,8 +1,10 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function config($locationProvider, $authProvider, $httpProvider, userMeProvider) {
+  function config($locationProvider, $authProvider, $httpProvider, userMeProvider, createUserProvider, $mdThemingProvider) {
     $locationProvider.html5Mode(true);
+
+    $mdThemingProvider.theme('dark');
 
     // AUTH
     $authProvider.withCredentials = true;
@@ -20,4 +22,5 @@ module.exports = /*@ngInject*/
     };
 
     userMeProvider.config(restConfig);
+    createUserProvider.config(restConfig);
   };

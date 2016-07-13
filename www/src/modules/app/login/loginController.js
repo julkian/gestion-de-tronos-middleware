@@ -11,7 +11,7 @@ module.exports = /*@ngInject*/
         }, function () {
           $mdToast.show(
             $mdToast.simple()
-              .textContent('Internal Server Error')
+              .textContent('Error on login')
               .position('top right')
               .hideDelay(3000)
           );
