@@ -1,25 +1,30 @@
-<div flex="100" layout="column" layout-align="center center">
-    <h1>Gestion de Tronos</h1>
-    <h2>Hold the Gold {{game.houseName}}</h2>
-    <p>Gold: {{game.totalGold}}</p>
-    <div flex layout="row">
-        <div layout="column" flex="50">
-            <gt-houses>
-            </gt-houses>
+<div layout="row">
+    <div flex="75" layout="column" layout-align="center center">
+        <h1>Gestion de Tronos</h1>
+        <h2>Hold the Gold {{game.houseName}}</h2>
+        <p>Gold: {{game.totalGold}}</p>
+        <div layout="row">
+            <div layout="column" flex="50">
+                <gt-houses>
+                </gt-houses>
+            </div>
+            <div flex="50">
+                another building
+            </div>
         </div>
-        <div flex="50">
-            another building
+        <div layout="row">
+            <div flex="33">
+                another building
+            </div>
+            <div flex="33">
+                another building
+            </div>
+            <div flex="33">
+                another building
+            </div>
         </div>
     </div>
-    <div flex layout="row">
-        <div flex="33">
-            another building
-        </div>
-        <div flex="33">
-            another building
-        </div>
-        <div flex="33">
-            another building
-        </div>
+    <div flex="25" layout="column" style="background-color: #D3D3D3;">
+        <h1>Chat of the thrones</h1>
     </div>
 </div>
