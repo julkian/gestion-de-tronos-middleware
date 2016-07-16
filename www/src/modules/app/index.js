@@ -15,7 +15,8 @@ module.exports =
         require('../resources').name,
         require('./home').name,
         require('./login').name,
-        require('./login/registration-user').name
+        require('./login/registration-user').name,
+        require('./spinner').name
 
     ])
         .config(require('./app.config'))

@@ -1,20 +1,24 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function loginController($auth, $state, $mdDialog, $mdToast) {
+  function loginController($auth, $state, $mdDialog, $mdToast, $rootScope, $q) {
     var vm = this;
 
     vm.doLogin = function () {
+      showWait();
       $auth.login(vm.user)
         .then(function () {
+          hideWait();
           $state.go('app.home');
         }, function () {
-          $mdToast.show(
-            $mdToast.simple()
-              .textContent('Error on login')
-              .position('top right')
-              .hideDelay(3000)
-          );
+          hideWait().then(function () {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Error on login')
+                .position('top right')
+                .hideDelay(3000)
+            );
+          });
         });
     };
 
@@ -27,4 +31,24 @@ module.exports = /*@ngInject*/
         controllerAs: 'registration'
       });
     };
+
+    function hideWait() {
+      var deferred = $q.defer();
+      setTimeout(function () {
+        $rootScope.$emit("hide_wait");
+        deferred.resolve();
+      }, 5);
+      return deferred.promise;
+    }
+
+    function showWait() {
+      $mdDialog.show({
+        controller: 'spinnerController',
+        controllerAs: 'spinner',
+        templateUrl: 'app/spinner/spinner.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: false,
+        fullscreen: false
+      });
+    }
   };
