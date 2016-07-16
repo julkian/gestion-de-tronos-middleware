@@ -23,10 +23,6 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog) {
     vm.families = _getFamilies(); //it already refresh vm.families
   }
 
-  function _fightAgainst(ev, familyName) {
-    console.log(familyName);
-  }
-
   function _getFamilies() {
     var _ = window._;
     var _families = $gameConstants.FAMILIES;
@@ -36,6 +32,28 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog) {
       family.alreadyDefeated = familyAlreadyDefeated;
     });
     return _families;
+  }
+
+  function _fightAgainst(ev, familyName) {
+    _showBeforeFightDialog(familyName);
+  }
+
+  function _showBeforeFightDialog(familyName) {
+    $mdDialog.show({
+      controller: _beforeFightDialogController,
+      templateUrl: 'directives/families/families.beforeFighting.dialog.html',
+      locals: {
+        familyName: familyName
+      },
+      clickOutsideToClose:true
+    });
+  }
+
+  function _beforeFightDialogController($scope, $mdDialog, familyName) {
+    $scope.familyName = familyName;
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
   }
 }
 
