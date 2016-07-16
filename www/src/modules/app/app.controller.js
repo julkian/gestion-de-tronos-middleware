@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state) {
+  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state, GameInfo, $interval) {
     var vm = this;
     vm.logout = logout;
     vm.toggleRightSidebar = toggleRightSidebar;
@@ -12,8 +12,9 @@ module.exports = /*@ngInject*/
 
     function inicialize() {
       userMe.me().$promise.then(function (data) {
-        $rootScope.me = data.message;
+        $rootScope.user = data.message;
         vm.currentUserName =  data.message.username;
+        getGame();
       }, function () {
         $auth.logout();
         $mdToast.show(
@@ -43,6 +44,13 @@ module.exports = /*@ngInject*/
       ];
     }
 
+    function getGame() {
+      GameInfo.get({gameId:$rootScope.user.gameId}).$promise.then(function (data) {
+        $rootScope.game = data.message;
+        vm.totalGold = $rootScope.game.totalGold;
+      });
+    }
+
     function toggleRightSidebar() {
       $mdSidenav('right').toggle();
     }
@@ -61,6 +69,7 @@ module.exports = /*@ngInject*/
 
     function logout() {
       $auth.logout();
+      $interval.cancel($rootScope._intervalGoldPromise);
       $state.go('login');
     }
   };
