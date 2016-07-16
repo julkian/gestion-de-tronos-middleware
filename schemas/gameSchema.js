@@ -7,7 +7,8 @@ var gameSchema = new Schema({
     soldiers: {type: Number, default: 0},
     houseName: String,
     Buildings: [],
-    familiesDefeated: []
+    familiesDefeated: [],
+    septonMultiplier: {type: Number, default: 1}
 });
 
 module.exports = mongoose.model('games', gameSchema);

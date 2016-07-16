@@ -1,6 +1,7 @@
 <h3>Families</h3>
 <div layout="row" layout-align="center center" layout-wrap>
   <div flex="25" ng-repeat="family in families.families track by $index">
-    <md-button class="md-raised" ng-click="families.showBeforeFightDialog($event, family.NAME)">{{family.NAME}}</md-button>
+    <md-button ng-if="!game.familiesDefeated[family.NAME]" class="md-raised" ng-click="families.showBeforeFightDialog($event, family.NAME)">{{family.NAME}}</md-button>
+    <span ng-if="game.familiesDefeated[family.NAME]"><s>{{family.NAME}}</s></span>
   </div>
 </div>

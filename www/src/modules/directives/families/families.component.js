@@ -10,8 +10,8 @@ function familiesDirective(/* inject dependencies here, i.e. : $rootScope */) {
   };
 }
 
-FamiliesController.$inject = ['$rootScope', '$gameConstants', '$mdDialog'];
-function FamiliesController ($rootScope, $gameConstants, $mdDialog) {
+FamiliesController.$inject = ['$rootScope', '$gameConstants', '$mdDialog', '$mdToast'];
+function FamiliesController ($rootScope, $gameConstants, $mdDialog, $mdToast) {
   var vm = this;
   vm.showBeforeFightDialog = _showBeforeFightDialog;
 
@@ -46,17 +46,68 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog) {
     });
   }
 
-  function _beforeFightDialogController($scope, $mdDialog, familyName) {
+  function _beforeFightDialogController($scope, $rootScope, $mdDialog, familyName, $mdToast) {
+    $scope.familyGoldCost = $gameConstants.FAMILIES[familyName.toUpperCase()].COST;
+    var familySoldiersCost = $gameConstants.FAMILIES[familyName.toUpperCase()].SOLDIERS;
     $scope.familyName = familyName;
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
     $scope.fight = function() {
-      console.log($scope.beforeFight);
+      var soldiersToRisk = parseInt($scope.beforeFight.soldiersToRisk);
+      if ($rootScope.game.totalGold < $scope.familyGoldCost && false) {
+        _showSimpleToast('Not enough gold to challenge');
+      } else if ($rootScope.game.soldiers < soldiersToRisk) {
+        _showSimpleToast('You do not own that much soldiers');
+      } else {
+        if (soldiersToRisk < familySoldiersCost) { //loosing fight
+          $rootScope.game.totalGold -= $scope.familyGoldCost;
+          _showAfterFightDialog(familyName, {
+            playerWon: false,
+            soldiersLost: soldiersToRisk
+          });
+        } else { //winning fight
+          $rootScope.game.familiesDefeated[familyName] = true;
+          _showAfterFightDialog(familyName, {
+            playerWon: true,
+            soldiersLost: parseInt((Math.random() / 2) * soldiersToRisk)
+          });
+        }
+      }
     };
   }
 
   /* AFTER FIGHT DIALOG MANAGEMENT */
+  function _showAfterFightDialog(familyName, fightResult) {
+      $rootScope.game.soldiers -= fightResult.soldiersLost;
+      $mdDialog.show({
+      controller: _afterFightDialogController,
+      templateUrl: 'directives/families/families.afterFighting.dialog.html',
+      locals: {
+        familyName: familyName,
+        fightResult: fightResult
+      },
+      clickOutsideToClose:true
+    });
+  }
+
+  function _afterFightDialogController($scope, $mdDialog, familyName, fightResult) {
+    $scope.playerWon = fightResult.playerWon;
+    $scope.soldiersLost = fightResult.soldiersLost;
+    $scope.familyName = familyName;
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
+  function _showSimpleToast(message) {
+    $mdToast.show(
+      $mdToast.simple()
+        .textContent(message)
+        .position('bottom right')
+        .hideDelay(3000)
+    );
+  }
 }
 
 module.exports = familiesDirective;

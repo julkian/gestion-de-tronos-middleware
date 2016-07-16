@@ -25,13 +25,23 @@ module.exports = /*@ngInject*/
                 },
                 game: {
                     houseName: "Pereanster",
-                    familiesDefeated: [],
+                    familiesDefeated: {
+                      Tully: false,
+                      Tyrell: false,
+                      Martell: false,
+                      Greyjoy: false,
+                      Baratheon: false,
+                      Stark: false,
+                      Lannister: false,
+                      Targaryen: false
+                    },
                     buildings: {
                         houses: 0
                     },
                     soldiers: 0,
                     goldRate: 1,
-                    totalGold: 0
+                    totalGold: 0,
+                    septonMultiplier: 1
                 }
             };
         }

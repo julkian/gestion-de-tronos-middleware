@@ -1,24 +1,15 @@
 <md-dialog aria-label="Dialog Before fighting families" flex="50" layout-padding  ng-cloak>
     <md-dialog-content>
-      <h2>Prepare to fight against {{familyName}}</h2>
-      <h4>How much will you risk?</h4>
+      <h2>Prepare to fight against the house {{familyName}}</h2>
+      <h4>Fight against this house will cost you {{familyGoldCost}} gold. How much soldires will you send?</h4>
       <form name="beforeFightForm">
-        <div layout-gt-md="row">
-          <md-input-container flex>
-            <label>Gold</label>
-            <input type="text" name="goldInput" required pattern="[0-9]*" ng-model="beforeFight.gold">
-            <div ng-messages="beforeFight.goldInput.$error" style="color:maroon" role="alert">
-              <div ng-message="required">Field si required</div>
-            </div>
-          </md-input-container>
-        </div>
         <div layout-gt-md="row">
           <md-input-container  flex>
             <label>Soldiers</label>
-            <input type="text"name="soldiersInput" required pattern="[0-9]*" ng-model="beforeFight.soldiers">
-            <div ng-messages="beforeFight.soldiersInput.$error" style="color:maroon" role="alert">
-              <div ng-message="required">Field si required</div>
-            </div>
+            <input type="text" pattern="[0-9]*"
+                   name="soldiersInput"
+                   ng-model="beforeFight.soldiersToRisk"
+                   required>
           </md-input-container>
         </div>
       </form>
