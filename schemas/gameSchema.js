@@ -6,7 +6,13 @@ var gameSchema = new Schema({
     goldRate: {type: Number, default: 1},
     soldiers: {type: Number, default: 0},
     houseName: String,
-    Buildings: {type: Object, default: {}},
+    buildings: {type: Object, default: {
+        houses: 0,
+        barracks: 0,
+        septon: 0,
+        bettingHouse: 0,
+        market: 0
+    }},
     familiesDefeated: {type: Object, default: {
         Tully: false,
         Tyrell: false,
