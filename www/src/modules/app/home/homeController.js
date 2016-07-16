@@ -1,10 +1,9 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-    function homeController($rootScope) {
+    function homeController($rootScope, $gameConstants) {
         var vm = this;
         vm.data = null;
-
 
         _initialize();
 

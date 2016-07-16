@@ -1,8 +1,7 @@
 <div layout="row" >
   <div flex="75" layout="column" layout-align="center center" class="layout-padding">
-
     <div layout="row" layout-wrap>
-      <div flex="100" style="background-color: #f6dd8e" layout="row" layout-align="space-around center">
+      <div flex="50" style="background-color: #f6dd8e" layout="row" layout-align="space-around center">
         <div layout="column">
           <h1>Gestion de Tronos</h1>
           <h2>Hold the Gold {{game.houseName}}</h2>
@@ -12,13 +11,15 @@
           <p>Soldiers: {{game.soldiers}}</p>
         </div>
       </div>
+      <div flex="50" style="background-color: #f6dd8e" layout="column" layout-align="center center">
+        <gt-families></gt-families>
+      </div>
       <gt-houses flex="50"></gt-houses>
       <gt-houses flex="50"></gt-houses>
       <gt-houses flex="33"></gt-houses>
       <gt-houses flex="33"></gt-houses>
       <gt-houses flex="33"></gt-houses>
     </div>
-
   </div>
 
   <div flex="25" layout="column" class="layout-padding">
