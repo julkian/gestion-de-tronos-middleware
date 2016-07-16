@@ -1,5 +1,14 @@
-md-sidenav.md-locked-open.md-sidenav-left {
-  width: 110px;
-  min-width: 110px;
-  max-width: 110px;
+.overlay-card {
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color: rgba(0,0,0,.7);
+}
+
+html,
+body {
+  margin:0;
+  height: 100%;
 }

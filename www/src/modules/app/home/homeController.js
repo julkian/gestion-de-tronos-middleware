@@ -27,7 +27,7 @@ module.exports = /*@ngInject*/
                     houseName: "Pereanster",
                     familiesDefeated: [],
                     buildings: {
-                        houses: 1
+                        houses: 0
                     },
                     soldiers: 0,
                     goldRate: 1,
