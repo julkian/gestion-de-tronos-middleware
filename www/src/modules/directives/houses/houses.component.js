@@ -21,11 +21,7 @@
         /////////////////////
 
         function initialize() {
-          if($rootScope.game.buildings.houses) {
-            vm.housesCost = $gameConstants.HOUSES[$rootScope.game.Buildings.houses+1 + ''].COST;
-          } else {
-            vm.housesCost = $gameConstants.HOUSES['1'].COST;
-          }
+          vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses+1 + ''].COST;
         }
 
 
