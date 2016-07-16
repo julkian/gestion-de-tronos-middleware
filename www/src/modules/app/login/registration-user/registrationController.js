@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function registrationController($mdDialog, $mdToast, createUser) {
+  function registrationController($mdDialog, $mdToast, createUser, createGame) {
     var vm = this;
 
     vm.closeUserDetail = closeDialog;
@@ -46,14 +46,26 @@ module.exports = /*@ngInject*/
 
     function save() {
       console.log('do save');
-      createUser.registration(vm.user).$promise.then(function () {
-        $mdToast.show(
-          $mdToast.simple()
-            .textContent('User Created')
-            .position('top right')
-            .hideDelay(3000)
-        );
-        closeDialog();
+      createUser.registration(vm.user).$promise.then(function (user) {
+        var game = {
+          "houseName": vm.familyName
+        };
+        createGame.startGame({userId:user.message._id}, game).$promise.then(function() {
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent('User Created')
+              .position('top right')
+              .hideDelay(3000)
+          );
+          closeDialog();
+        }, function () {
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent('Internal Server Error')
+              .position('top right')
+              .hideDelay(3000)
+          );
+        });
       }, function () {
         $mdToast.show(
           $mdToast.simple()

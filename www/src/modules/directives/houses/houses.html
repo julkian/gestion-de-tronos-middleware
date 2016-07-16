@@ -1,5 +1,5 @@
 <md-card style="position: relative; height: 300px;">
-  <div flex layout="column" layout-align="center center"  class="overlay-card" ng-if="game.buildings.houses == 0">
+  <div flex layout="column" layout-align="center center"  class="overlay-card" ng-if="game.Buildings.houses">
     <md-card-content style="color:#fafafa">
       Houses: if you build it you will increment your gold ratio
     </md-card-content>
@@ -12,20 +12,20 @@
     </md-button>
   </div>
   <md-card-title>
-    <md-card-title-text ng-if="game.buildings.houses != 0">
+    <md-card-title-text ng-if="game.Buildings.houses != 0">
       <span class="md-headline">Houses</span>
-      <span class="md-subhead">Level: {{game.buildings.houses}}</span>
+      <span class="md-subhead">Level: {{game.Buildings.houses}}</span>
     </md-card-title-text>
-    <md-card-title-media ng-if="game.buildings.houses != 0">
+    <md-card-title-media ng-if="game.Buildings.houses != 0">
       <div class="md-media-lg card-media">
         <img ng-src="http://orig09.deviantart.net/e143/f/2013/169/1/f/medieval_house___pixel_art_by_wupto-d69k7av.png"/>
       </div>
     </md-card-title-media>
   </md-card-title>
-  <md-card-content ng-if="game.buildings.houses != 0">
+  <md-card-content ng-if="game.Buildings.houses != 0">
     Level up your houses to have more people to steal to... I mean to pay taxes.
   </md-card-content>
-  <md-card-actions layout="row" layout-align="end center" ng-if="game.buildings.houses != 0">
+  <md-card-actions layout="row" layout-align="end center" ng-if="game.Buildings.houses != 0">
     <md-button
       md-no-ink
       ng-disabled="game.totalGold < houses.housesCost"

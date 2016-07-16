@@ -3,6 +3,16 @@ var gameImpl = require('../../implementation/games.implementation');
 var serverConstants = require('../../constants/application');
 var authImpl = require('../../implementation/auth.implementation');
 
+
+
+router.post('/game/:userId', function (req, res) {
+    gameImpl.createGame(req.params.userId, req.body).then(function () {
+        res.json({status: 200, message: 'game created successfully'});
+    }, function (error) {
+        res.status(error.status).send(error);
+    });
+});
+
 router.use("/game", function (req, res, next) {
     authImpl.verify(req).then(function (newReq) {
         req = newReq;
@@ -34,14 +44,6 @@ router.route('/game/:gameId')
             res.status(error.status).send(error);
         });
     });
-
-router.post('/game/:userId', function (req, res) {
-    gameImpl.createGame(req.params.userId, req.body).then(function () {
-        res.json({status: 200, message: 'game created successfully'});
-    }, function (error) {
-        res.status(error.status).send(error);
-    });
-});
 
 module.exports = router;
 

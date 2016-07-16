@@ -10,10 +10,9 @@
         };
     }
 
-    HousesController.$inject = ['$scope', '$interval', '$gameConstants'];
+    HousesController.$inject = ['$rootScope', '$interval', '$gameConstants'];
     function HousesController ($rootScope, $interval, $gameConstants) {
         var vm = this;
-        var _intervalGoldPromise = null;
         vm.housesCost = null;
         vm.levelUpHouses = _levelUpHouses;
 
@@ -22,15 +21,14 @@
         /////////////////////
 
         function initialize() {
-            vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses+1 + ''].COST;
-            _startGoldInterval();
+          console.log($rootScope.game);
+          if($rootScope.game.Buildings.length) {
+            vm.housesCost = $gameConstants.HOUSES[$rootScope.game.Buildings.houses+1 + ''].COST;
+          } else {
+            vm.housesCost = $gameConstants.HOUSES['1'].COST;
+          }
         }
 
-        function _startGoldInterval() {
-            _intervalGoldPromise = $interval(function () {
-                $rootScope.game.totalGold += $rootScope.game.goldRate;
-            }, 1000);
-        }
 
         function _levelUpHouses() {
             var maxLevel = Object.keys($gameConstants.HOUSES).length;
