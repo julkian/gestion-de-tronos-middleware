@@ -6,8 +6,17 @@ var gameSchema = new Schema({
     goldRate: {type: Number, default: 1},
     soldiers: {type: Number, default: 0},
     houseName: String,
-    Buildings: [],
-    familiesDefeated: [],
+    Buildings: {},
+    familiesDefeated: {
+        Tully: false,
+        Tyrell: false,
+        Martell: false,
+        Greyjoy: false,
+        Baratheon: false,
+        Stark: false,
+        Lannister: false,
+        Targaryen: false
+    },
     septonMultiplier: {type: Number, default: 1}
 });
 
