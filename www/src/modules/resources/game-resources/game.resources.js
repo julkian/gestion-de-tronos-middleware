@@ -20,6 +20,28 @@ var createGameProvider = function() {
   };
 };
 
+var saveGameProvider = function() {
+  // Configuration and default parameters
+  var params = {};
+  var baseUrl = '';
+  var serviceBaseUrl = '/rest/game/';
+  this.config = function(config) {
+    params = angular.copy(config);
+    baseUrl = params.baseUrl || baseUrl;
+    delete params.baseUrl;
+  };
+  this.$get = function($resource) {
+    // Allowed operations
+    var actions = {
+      save: {
+        url: baseUrl + serviceBaseUrl + ':gameId',
+        method: 'PUT'
+      }
+    };
+    return $resource(baseUrl + serviceBaseUrl, null, actions);
+  };
+};
+
 var getGameProvider = function() {
   // Configuration and default parameters
   var params = {};
@@ -45,5 +67,6 @@ var getGameProvider = function() {
 
 module.exports = {
   createGameProvider: createGameProvider,
-  getGameProvider:getGameProvider
+  getGameProvider:getGameProvider,
+  saveGameProvider: saveGameProvider
 };

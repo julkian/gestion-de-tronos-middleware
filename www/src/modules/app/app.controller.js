@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state, GameInfo, $interval) {
+  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state, GameInfo, $interval, saveGame) {
     var vm = this;
     vm.logout = logout;
     vm.toggleRightSidebar = toggleRightSidebar;
@@ -14,7 +14,7 @@ module.exports = /*@ngInject*/
       userMe.me().$promise.then(function (data) {
         $rootScope.user = data.message;
         vm.currentUserName =  data.message.username;
-        getGame();
+        getGameAndStartInterval();
       }, function () {
         $auth.logout();
         $mdToast.show(
@@ -44,10 +44,13 @@ module.exports = /*@ngInject*/
       ];
     }
 
-    function getGame() {
+    function getGameAndStartInterval() {
       GameInfo.get({gameId:$rootScope.user.gameId}).$promise.then(function (data) {
         $rootScope.game = data.message;
         vm.totalGold = $rootScope.game.totalGold;
+        $rootScope._saveGameInterval = $interval(function () {
+          saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
+        }, 5000);
       });
     }
 
@@ -70,6 +73,7 @@ module.exports = /*@ngInject*/
     function logout() {
       $auth.logout();
       $interval.cancel($rootScope._intervalGoldPromise);
+      $interval.cancel($rootScope._saveGameInterval);
       $state.go('login');
     }
   };

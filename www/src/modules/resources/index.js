@@ -5,4 +5,5 @@ module.exports =
     .provider('userMe', require('./users-resources/user.resources').userMeProvider)
     .provider('createUser', require('./users-resources/user.resources').createUserProvider)
     .provider('createGame', require('./game-resources/game.resources').createGameProvider)
-    .provider('GameInfo', require('./game-resources/game.resources').getGameProvider);
+    .provider('GameInfo', require('./game-resources/game.resources').getGameProvider)
+    .provider('saveGame', require('./game-resources/game.resources').saveGameProvider);

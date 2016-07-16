@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function config($locationProvider, $authProvider, $httpProvider, userMeProvider, createUserProvider, $mdThemingProvider, createGameProvider, GameInfoProvider) {
+  function config($locationProvider, $authProvider, $httpProvider, userMeProvider, createUserProvider, $mdThemingProvider, createGameProvider, GameInfoProvider, saveGameProvider) {
     $locationProvider.html5Mode(true);
 
     $mdThemingProvider
@@ -62,4 +62,5 @@ module.exports = /*@ngInject*/
     createUserProvider.config(restConfig);
     createGameProvider.config(restConfig);
     GameInfoProvider.config(restConfig);
+    saveGameProvider.config(restConfig);
   };
