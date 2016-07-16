@@ -38,8 +38,8 @@ router.get('/users', function (req, res) {
 });
 
 router.post('/register', function (req, res) {
-    userImpl.createUser(req.body).then(function () {
-        res.json({status: 200, message: 'OK'});
+    userImpl.createUser(req.body).then(function (user) {
+        res.json({status: 200, message: user});
     }, function (error) {
         res.status(error.status).send(error);
     });
