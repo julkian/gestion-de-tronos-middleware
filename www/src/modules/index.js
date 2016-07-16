@@ -9,6 +9,7 @@ require('angular-messages');
 require('angular-material');
 require('satellizer');
 require('ngResource');
+window._ = require('underscore');
 
 //app entry point
 require('./app');
