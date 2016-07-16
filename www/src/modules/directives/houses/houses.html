@@ -11,12 +11,12 @@
       lvl up (cost {{houses.housesCost}})
     </md-button>
   </div>
-  <md-card-title>
-    <md-card-title-text ng-if="game.buildings.houses">
+  <md-card-title ng-if="game.buildings.houses">
+    <md-card-title-text>
       <span class="md-headline">Houses</span>
       <span class="md-subhead">Level: {{game.buildings.houses}}</span>
     </md-card-title-text>
-    <md-card-title-media ng-if="game.buildings.houses">
+    <md-card-title-media>
       <div class="md-media-lg card-media">
         <img ng-src="http://orig09.deviantart.net/e143/f/2013/169/1/f/medieval_house___pixel_art_by_wupto-d69k7av.png"/>
       </div>
