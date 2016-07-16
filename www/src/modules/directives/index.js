@@ -2,4 +2,6 @@
 
 module.exports =
   angular.module('app.component.directives', [])
-  .directive('gtHouses', require('./houses/houses.component.js'));
+    .directive('gtHouses', require('./houses/houses.component'))
+    .directive('gtBarracks', require('./barracks/barracks.component'));
+

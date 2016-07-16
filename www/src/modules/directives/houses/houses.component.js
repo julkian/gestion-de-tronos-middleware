@@ -10,7 +10,7 @@
         };
     }
 
-    HousesController.$inject = ['$scope', '$interval', '$gameConstants'];
+    HousesController.$inject = ['$rootScope', '$interval', '$gameConstants'];
     function HousesController ($rootScope, $interval, $gameConstants) {
         var vm = this;
         var _intervalGoldPromise = null;
