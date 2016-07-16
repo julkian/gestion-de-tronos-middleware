@@ -13,7 +13,7 @@ function familiesDirective(/* inject dependencies here, i.e. : $rootScope */) {
 FamiliesController.$inject = ['$rootScope', '$gameConstants', '$mdDialog'];
 function FamiliesController ($rootScope, $gameConstants, $mdDialog) {
   var vm = this;
-  vm.fightAgainst = _fightAgainst;
+  vm.showBeforeFightDialog = _showBeforeFightDialog;
 
   initialize();
 
@@ -34,11 +34,8 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog) {
     return _families;
   }
 
-  function _fightAgainst(ev, familyName) {
-    _showBeforeFightDialog(familyName);
-  }
-
-  function _showBeforeFightDialog(familyName) {
+  /* BEFORE FIGHT DIALOG MANAGEMENT */
+  function _showBeforeFightDialog(ev, familyName) {
     $mdDialog.show({
       controller: _beforeFightDialogController,
       templateUrl: 'directives/families/families.beforeFighting.dialog.html',
@@ -54,7 +51,12 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog) {
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
+    $scope.fight = function() {
+      console.log($scope.beforeFight);
+    };
   }
+
+  /* AFTER FIGHT DIALOG MANAGEMENT */
 }
 
 module.exports = familiesDirective;
