@@ -10,8 +10,8 @@
         };
     }
 
-    HousesController.$inject = ['$rootScope', '$gameConstants'];
-    function HousesController ($rootScope, $gameConstants) {
+    HousesController.$inject = ['$rootScope', '$gameConstants', 'saveGame'];
+    function HousesController ($rootScope, $gameConstants, saveGame) {
         var vm = this;
         vm.housesCost = null;
         vm.levelUpHouses = _levelUpHouses;
@@ -32,6 +32,7 @@
                 $rootScope.game.buildings.houses++;
                 $rootScope.game.goldRate = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].GOLD_RATE;
                 vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses+1 + ''].COST;
+                saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
             }
         }
 

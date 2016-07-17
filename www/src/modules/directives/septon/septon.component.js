@@ -10,8 +10,8 @@ function septonDirective(/* inject dependencies here, i.e. : $rootScope */) {
   };
 }
 
-SeptonController.$inject = ['$rootScope', '$gameConstants', '$mdDialog'];
-function SeptonController($rootScope, $gameConstants, $mdDialog) {
+SeptonController.$inject = ['$rootScope', '$gameConstants', '$mdDialog', 'saveGame'];
+function SeptonController($rootScope, $gameConstants, $mdDialog, saveGame) {
   var vm = this;
   vm.tribute = 0;
   vm.onClick = _onClick;
@@ -52,11 +52,13 @@ function SeptonController($rootScope, $gameConstants, $mdDialog) {
         .ok('Thank the gods')
         .targetEvent(ev)
     );
+    saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
   }
 
   function _buySepton() {
     $rootScope.game.totalGold -= vm.septonCost;
     $rootScope.game.buildings.septon++;
+    saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
   }
 
 }

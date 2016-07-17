@@ -32,12 +32,12 @@ module.exports = {
     SEPTON: {
         COST: 500,
         TRIBUTE: {
-          1000: {MULTIPLIER: 2, MESSAGE: 'El septón te da las gracias... por nada'},
-          10000: {MULTIPLIER: 4, MESSAGE: 'El septón se siente minimamente agradecido'},
-          100000: {MULTIPLIER: 6, MESSAGE: 'El septón sigue pensando que racaneáis a la fe'},
-          250000: {MULTIPLIER: 8, MESSAGE: 'El septón agradece el tributo'},
-          500000: {MULTIPLIER: 10, MESSAGE: 'El septón explota de emoción (no literalmente)'},
-          500288: {MULTIPLIER: 12, MESSAGE: 'Han bajado los 7 Dioses en persona a recoger el tributo'}
+          1000: {MULTIPLIER: 2, MESSAGE: 'Septon looks at you with a \"Thanks for nothing\" face'},
+          10000: {MULTIPLIER: 4, MESSAGE: 'Septon feels a little grateful'},
+          100000: {MULTIPLIER: 6, MESSAGE: 'Septon thinks that the tribute is cheap'},
+          250000: {MULTIPLIER: 8, MESSAGE: 'Septon thanks the tribute'},
+          500000: {MULTIPLIER: 10, MESSAGE: 'Septon explodes with joy (not literally)'},
+          500288: {MULTIPLIER: 12, MESSAGE: 'The seven Gods came from the heavens to get the tribute'}
         }
     },
     FAMILIES: {

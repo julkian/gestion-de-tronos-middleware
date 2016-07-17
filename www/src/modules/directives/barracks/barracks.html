@@ -1,7 +1,8 @@
 <md-card style="position: relative; height: 300px;">
   <div flex layout="column" layout-align="center center"  class="overlay-card" ng-if="!game.buildings.barracks">
     <md-card-content style="color:#fafafa">
-      Barracks: if you build it you will increment your gold ratio
+      <h2>Barracks</h2>
+      <p>Start building to train soldiers and prepare for fight!</p>
     </md-card-content>
     <md-button
       md-no-ink
@@ -11,11 +12,11 @@
       lvl up (cost {{barracks.barracksCost}})
     </md-button>
   </div>
-  <md-card-title>
-    <md-card-title-text ng-if="game.buildings.barracks">
+  <md-card-title ng-if="game.buildings.barracks">
+    <md-card-title-text>
       <span class="md-headline">Barracks</span>
     </md-card-title-text>
-    <md-card-title-media ng-if="game.buildings.barracks">
+    <md-card-title-media>
       <div class="md-media-lg card-media">
         <img ng-src="http://media.moddb.com/images/articles/1/167/166075/auto/pic1.png"/>
       </div>

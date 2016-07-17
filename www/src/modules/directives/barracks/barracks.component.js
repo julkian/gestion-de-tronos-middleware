@@ -10,10 +10,10 @@ function barracksDirective(/* inject dependencies here, i.e. : $rootScope */) {
   };
 }
 
-BarracksController.$inject = ['$rootScope','$gameConstants', '$mdDialog', '$mdToast'];
-function BarracksController($rootScope, $gameConstants, $mdDialog, $mdToast) {
+BarracksController.$inject = ['$rootScope','$gameConstants', '$mdDialog', '$mdToast', 'saveGame'];
+function BarracksController($rootScope, $gameConstants, $mdDialog, $mdToast, saveGame) {
   var vm = this;
-  vm.soldierCost = 10;
+  vm.soldierCost = $gameConstants.BARRACKS.TRAIN_COST;
   vm.createSoldier = _createSoldier;
   vm.buyBarracks = _buyBarracks;
   vm.showCreateSoldiersDialog = _showCreateSoldiersDialog;
@@ -34,17 +34,18 @@ function BarracksController($rootScope, $gameConstants, $mdDialog, $mdToast) {
   function _buyBarracks() {
     $rootScope.game.totalGold -= vm.barracksCost;
     $rootScope.game.buildings.barracks++;
+    saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
   }
 
   function _showCreateSoldiersDialog() {
     $mdDialog.show({
-      controller: _beforeFightDialogController,
+      controller: _trainSoldiersDialogController,
       templateUrl: 'directives/barracks/barracks.dialog.html',
       clickOutsideToClose:true
     });
   }
 
-  function _beforeFightDialogController($scope, $rootScope, $mdDialog) {
+  function _trainSoldiersDialogController($scope, $rootScope, $mdDialog) {
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
@@ -57,6 +58,7 @@ function BarracksController($rootScope, $gameConstants, $mdDialog, $mdToast) {
         $rootScope.game.totalGold -= soldiersToTrain * $gameConstants.BARRACKS.TRAIN_COST;
         _showSimpleToast(soldiersToTrain + ' more soldiers ready to fight');
         $mdDialog.hide();
+        saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
       }
     };
   }

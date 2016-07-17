@@ -1,7 +1,8 @@
 <md-card style="position: relative; height: 300px;">
   <div flex layout="column" layout-align="center center"  class="overlay-card" ng-if="!game.buildings.septon">
     <md-card-content style="color:#fafafa">
-      Septon: if you build it you will increment your gold ratio
+      <h2>Septon</h2>
+      <p>Start building to ask for help to the seven Gods</p>
     </md-card-content>
     <md-button
       md-no-ink
@@ -11,11 +12,11 @@
       lvl up (cost {{septon.septonCost}})
     </md-button>
   </div>
-  <md-card-title>
-    <md-card-title-text ng-if="game.buildings.septon">
+  <md-card-title ng-if="game.buildings.septon">
+    <md-card-title-text>
       <span class="md-headline">Septon</span>
     </md-card-title-text>
-    <md-card-title-media ng-if="game.buildings.septon">
+    <md-card-title-media>
       <div class="md-media-lg card-media">
         <img ng-src="https://s-media-cache-ak0.pinimg.com/564x/b7/aa/e9/b7aae923b72c557ba790d6110e4c8f95.jpg"/>
       </div>
