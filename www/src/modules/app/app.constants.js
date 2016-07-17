@@ -51,5 +51,5 @@ module.exports = {
         TULLY: {NAME: 'Tully', COST: 1000, SOLDIERS: 500}
     },
     BARRACKS: {COST:500, TRAIN_COST: 10},
-    GAMBLING_HALL: {COST: 75000}
+    GAMBLING_HALL: {COST: 7500}
 };

@@ -10,7 +10,7 @@ var gameSchema = new Schema({
         houses: 0,
         barracks: 0,
         septon: 0,
-        bettingHouse: 0,
+        gamblingHall: 0,
         market: 0
     }},
     familiesDefeated: {type: Object, default: {
