@@ -10,8 +10,8 @@ function gamblingHallDirective(/* inject dependencies here, i.e. : $rootScope */
   };
 }
 
-GamblingHallController.$inject = ['$rootScope', '$gameConstants', '$mdDialog'];
-function GamblingHallController($rootScope, $gameConstants, $mdDialog) {
+GamblingHallController.$inject = ['$rootScope', '$gameConstants', '$mdDialog', 'saveGame'];
+function GamblingHallController($rootScope, $gameConstants, $mdDialog, saveGame) {
   var vm = this;
   vm.bet = 0;
   vm.onClick = _onClick;
@@ -53,6 +53,7 @@ function GamblingHallController($rootScope, $gameConstants, $mdDialog) {
           .targetEvent(ev)
       );
     }
+    saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
   }
 
   function _buyGamblingHall() {
