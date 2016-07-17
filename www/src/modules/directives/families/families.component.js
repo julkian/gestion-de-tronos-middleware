@@ -60,7 +60,7 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog, $mdToast) {
       } else if ($rootScope.game.soldiers < soldiersToRisk) {
         _showSimpleToast('You do not own that much soldiers');
       } else {
-        if (soldiersToRisk < familySoldiersCost) { //loosing fight
+        if (soldiersToRisk * $rootScope.game.septonMultiplier < familySoldiersCost) { //loosing fight
           $rootScope.game.totalGold -= $scope.familyGoldCost;
           _showAfterFightDialog(familyName, {
             playerWon: false,
