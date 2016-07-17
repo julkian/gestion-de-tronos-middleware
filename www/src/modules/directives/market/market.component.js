@@ -17,9 +17,6 @@ function MarketController($rootScope, $gameConstants, saveGame) {
 
   initialize();
 
-  $rootScope.game.totalGold = 100000;
-  $rootScope.game.soldiers = 100000;
-
   /////////////////////
 
   function initialize() {
