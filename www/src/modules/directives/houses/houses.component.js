@@ -21,7 +21,7 @@
         /////////////////////
 
         function initialize() {
-          vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses+1 + ''].COST;
+          vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses + 1 + ''].COST;
         }
 
 
@@ -30,8 +30,9 @@
             if ($rootScope.game.buildings.houses <= maxLevel) {
                 $rootScope.game.totalGold -= vm.housesCost;
                 $rootScope.game.buildings.houses++;
+
                 $rootScope.game.goldRate = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].GOLD_RATE;
-                vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses+1 + ''].COST;
+                vm.housesCost = $gameConstants.HOUSES[$rootScope.game.buildings.houses + 1 + ''].COST;
                 saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
             }
         }
