@@ -1,12 +1,10 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state, GameInfo, $interval, saveGame, $mdDialog) {
+  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state, GameInfo, $interval, saveGame, $mdDialog, $scope) {
     var vm = this;
     vm.logout = logout;
     vm.toggleRightSidebar = toggleRightSidebar;
-    vm.selectItem = selectItem;
-    vm.toggleItemsList = toggleItemsList;
 
     inicialize();
 
@@ -30,20 +28,20 @@ module.exports = /*@ngInject*/
         "Duis convallis velit eleifend, molestie justo id, interdum enim. Nullam interdum velit nec odio tristique fringilla. Sed rhoncus tortor in leo fringilla, mattis tristique " +
         "velit ullamcorper. Aliquam pulvinar, est ut interdum bibendum, dolor purus tristique urna, eu tempus erat tellus eu felis.";
 
-      vm.menuItems = [
-        {
-          name: 'Game',
-          icon: 'games',
-          sref: '.home'
-        },
-        {
-          name: 'FAQ',
-          icon: 'chat_bubble',
-          sref: '.somewhere'
-        }
-      ];
 
-      $rootScope.$watch('game.familiesDefeated', function (newValue) {
+
+    function getGameAndStartInterval() {
+      GameInfo.get({gameId: $rootScope.user.gameId}).$promise.then(function (data) {
+        $rootScope.game = data.message;
+        vm.totalGold = $rootScope.game.totalGold;
+        $rootScope._saveGameInterval = $interval(function () {
+          saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function () {
+          });
+        }, 5000);
+      });
+    }
+
+      $scope.$watch('game.familiesDefeated', function (newValue) {
         var families = window._.keys(newValue);
         var count = 0;
         for(var i = 0; i < families.length; ++i) {
@@ -62,37 +60,16 @@ module.exports = /*@ngInject*/
       });
     }
 
-    function getGameAndStartInterval() {
-      GameInfo.get({gameId: $rootScope.user.gameId}).$promise.then(function (data) {
-        $rootScope.game = data.message;
-        vm.totalGold = $rootScope.game.totalGold;
-        $rootScope._saveGameInterval = $interval(function () {
-          saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function () {
-          });
-        }, 5000);
-      });
-    }
-
     function toggleRightSidebar() {
       $mdSidenav('left').toggle();
-    }
-
-    function toggleItemsList() {
-      var pending = $mdBottomSheet.hide() || $q.when(true);
-
-      pending.then(function () {
-        $mdSidenav('right').toggle();
-      });
-    }
-
-    function selectItem() {
-      vm.toggleItemsList();
     }
 
     function logout() {
       $auth.logout();
       $interval.cancel($rootScope._intervalGoldPromise);
       $interval.cancel($rootScope._saveGameInterval);
+      $rootScope.user = undefined;
+      $rootScope.game = undefined;
       $state.go('login');
     }
   };
