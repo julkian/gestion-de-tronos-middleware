@@ -30,12 +30,15 @@ module.exports = {
         5: {COST: 1000000, SAVE_PERCENT: 50}
     },
     SEPTON: {
-        1000: { MULTIPLIER: 2, MESSAGE: 'El septón te da las gracias... por nada' },
-        10000: { MULTIPLIER: 4, MESSAGE: 'El septón se siente minimamente agradecido' },
-        100000: { MULTIPLIER: 6, MESSAGE: 'El septón sigue pensando que racaneáis a la fe' },
-        250000: { MULTIPLIER: 8, MESSAGE: 'El septón agradece el tributo' },
-        500000: { MULTIPLIER: 10, MESSAGE: 'El septón explota de emoción (no literalmente)' },
-        500288: { MULTIPLIER: 12, MESSAGE: 'Han bajado los 7 Dioses en persona a recoger el tributo' }
+        COST: 500,
+        TRIBUTE: {
+          1000: {MULTIPLIER: 2, MESSAGE: 'El septón te da las gracias... por nada'},
+          10000: {MULTIPLIER: 4, MESSAGE: 'El septón se siente minimamente agradecido'},
+          100000: {MULTIPLIER: 6, MESSAGE: 'El septón sigue pensando que racaneáis a la fe'},
+          250000: {MULTIPLIER: 8, MESSAGE: 'El septón agradece el tributo'},
+          500000: {MULTIPLIER: 10, MESSAGE: 'El septón explota de emoción (no literalmente)'},
+          500288: {MULTIPLIER: 12, MESSAGE: 'Han bajado los 7 Dioses en persona a recoger el tributo'}
+        }
     },
     FAMILIES: {
         TARGARYEN: {NAME: 'Targaryen', COST: 1000000, SOLDIERS: 400000},

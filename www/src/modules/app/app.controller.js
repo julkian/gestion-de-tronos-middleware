@@ -55,14 +55,14 @@ module.exports = /*@ngInject*/
     }
 
     function toggleRightSidebar() {
-      $mdSidenav('right').toggle();
+      $mdSidenav('left').toggle();
     }
 
     function toggleItemsList() {
       var pending = $mdBottomSheet.hide() || $q.when(true);
 
       pending.then(function(){
-        $mdSidenav('left').toggle();
+        $mdSidenav('right').toggle();
       });
     }
 
