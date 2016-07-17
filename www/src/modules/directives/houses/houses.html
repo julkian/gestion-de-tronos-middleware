@@ -26,7 +26,7 @@
   <md-card-content ng-if="game.buildings.houses">
     Level up your houses to have more people to steal to... I mean to pay taxes.
   </md-card-content>
-  <md-card-actions layout="row" layout-align="end center" ng-if="game.buildings.houses">
+  <md-card-actions layout="row" layout-align="end center" ng-if="game.buildings.houses || game.buildings.houses === 20">
     <md-button
       md-no-ink
       ng-disabled="game.totalGold < houses.housesCost"
