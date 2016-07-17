@@ -35,7 +35,7 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog, $mdToast) {
   }
 
   /* BEFORE FIGHT DIALOG MANAGEMENT */
-  function _showBeforeFightDialog(ev, familyName) {
+  function _showBeforeFightDialog(familyName) {
     $mdDialog.show({
       controller: _beforeFightDialogController,
       templateUrl: 'directives/families/families.beforeFighting.dialog.html',
@@ -55,7 +55,7 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog, $mdToast) {
     };
     $scope.fight = function() {
       var soldiersToRisk = parseInt($scope.beforeFight.soldiersToRisk);
-      if ($rootScope.game.totalGold < $scope.familyGoldCost && false) {
+      if ($rootScope.game.totalGold < $scope.familyGoldCost) {
         _showSimpleToast('Not enough gold to challenge');
       } else if ($rootScope.game.soldiers < soldiersToRisk) {
         _showSimpleToast('You do not own that much soldiers');

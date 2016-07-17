@@ -10,8 +10,8 @@
         };
     }
 
-    HousesController.$inject = ['$rootScope', '$interval', '$gameConstants'];
-    function HousesController ($rootScope, $interval, $gameConstants) {
+    HousesController.$inject = ['$rootScope', '$gameConstants'];
+    function HousesController ($rootScope, $gameConstants) {
         var vm = this;
         vm.housesCost = null;
         vm.levelUpHouses = _levelUpHouses;
