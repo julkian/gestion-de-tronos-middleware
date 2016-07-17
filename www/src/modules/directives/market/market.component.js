@@ -24,7 +24,9 @@ function MarketController($rootScope, $gameConstants, saveGame) {
 
   function initialize() {
     vm.marketCost = $gameConstants.MARKET[$rootScope.game.buildings.market+1 + ''].COST;
-    vm.marketDiscount = $gameConstants.MARKET[$rootScope.game.buildings.market + ''].SAVE_PERCENT;
+    if ($rootScope.game.buildings.market) {
+      vm.marketDiscount = $gameConstants.MARKET[$rootScope.game.buildings.market + ''].SAVE_PERCENT;
+    }
   }
 
   function _lvlUpMarket() {
