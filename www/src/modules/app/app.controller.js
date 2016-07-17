@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state, GameInfo, $interval, saveGame) {
+  function appController($rootScope, $auth, userMe, $mdToast, $mdSidenav, $mdBottomSheet, $q, $state, GameInfo, $interval, saveGame, $mdDialog) {
     var vm = this;
     vm.logout = logout;
     vm.toggleRightSidebar = toggleRightSidebar;
@@ -13,7 +13,7 @@ module.exports = /*@ngInject*/
     function inicialize() {
       userMe.me().$promise.then(function (data) {
         $rootScope.user = data.message;
-        vm.currentUserName =  data.message.username;
+        vm.currentUserName = data.message.username;
         getGameAndStartInterval();
       }, function () {
         $auth.logout();
@@ -42,14 +42,33 @@ module.exports = /*@ngInject*/
           sref: '.somewhere'
         }
       ];
+
+      $rootScope.$watch('game.familiesDefeated', function (newValue) {
+        var families = window._.keys(newValue);
+        var count = 0;
+        for(var i = 0; i < families.length; ++i) {
+          if (newValue[families[i]]) {
+            count ++;
+          }
+        }
+        if(count === 8) {
+          $mdDialog.show({
+            controller: 'winController',
+            controllerAs: 'win',
+            templateUrl: 'app/winDialog/win.html',
+            clickOutsideToClose:false
+          });
+        }
+      });
     }
 
     function getGameAndStartInterval() {
-      GameInfo.get({gameId:$rootScope.user.gameId}).$promise.then(function (data) {
+      GameInfo.get({gameId: $rootScope.user.gameId}).$promise.then(function (data) {
         $rootScope.game = data.message;
         vm.totalGold = $rootScope.game.totalGold;
         $rootScope._saveGameInterval = $interval(function () {
-          saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
+          saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function () {
+          });
         }, 5000);
       });
     }
@@ -61,12 +80,12 @@ module.exports = /*@ngInject*/
     function toggleItemsList() {
       var pending = $mdBottomSheet.hide() || $q.when(true);
 
-      pending.then(function(){
+      pending.then(function () {
         $mdSidenav('right').toggle();
       });
     }
 
-    function selectItem () {
+    function selectItem() {
       vm.toggleItemsList();
     }
 
