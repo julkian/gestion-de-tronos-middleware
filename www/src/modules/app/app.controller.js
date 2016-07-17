@@ -23,13 +23,6 @@ module.exports = /*@ngInject*/
         );
       });
 
-      vm.faq = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quam elit, viverra vel diam vestibulum, malesuada " +
-        "mattis dui. Donec in purus pharetra, dapibus libero et, fermentum lectus. Vestibulum in condimentum metus. Nunc non eros sit amet turpis pellentesque aliquam. " +
-        "Duis convallis velit eleifend, molestie justo id, interdum enim. Nullam interdum velit nec odio tristique fringilla. Sed rhoncus tortor in leo fringilla, mattis tristique " +
-        "velit ullamcorper. Aliquam pulvinar, est ut interdum bibendum, dolor purus tristique urna, eu tempus erat tellus eu felis.";
-
-
-
     function getGameAndStartInterval() {
       GameInfo.get({gameId: $rootScope.user.gameId}).$promise.then(function (data) {
         $rootScope.game = data.message;
