@@ -64,9 +64,32 @@ var getGameProvider = function() {
   };
 };
 
+var deleteGameProvider = function() {
+  // Configuration and default parameters
+  var params = {};
+  var baseUrl = '';
+  var serviceBaseUrl = '/rest/game/';
+  this.config = function(config) {
+    params = angular.copy(config);
+    baseUrl = params.baseUrl || baseUrl;
+    delete params.baseUrl;
+  };
+  this.$get = function($resource) {
+    // Allowed operations
+    var actions = {
+      remove: {
+        url: baseUrl + serviceBaseUrl + ':gameId',
+        method: 'DELETE'
+      }
+    };
+    return $resource(baseUrl + serviceBaseUrl, null, actions);
+  };
+};
+
 
 module.exports = {
   createGameProvider: createGameProvider,
   getGameProvider:getGameProvider,
-  saveGameProvider: saveGameProvider
+  saveGameProvider: saveGameProvider,
+  deleteGameProvider: deleteGameProvider
 };
