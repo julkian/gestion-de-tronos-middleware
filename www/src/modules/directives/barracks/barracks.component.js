@@ -16,14 +16,14 @@ function BarracksController($rootScope, $gameConstants, $mdDialog, $mdToast) {
   vm.soldierCost = 10;
   vm.createSoldier = _createSoldier;
   vm.buyBarracks = _buyBarracks;
-  vm.showCreateSoldiersDialog = _showCreateSoldiersDialog();
+  vm.showCreateSoldiersDialog = _showCreateSoldiersDialog;
 
   initialize();
 
   /////////////////////
 
   function initialize() {
-    vm.barracksCost = $gameConstants.HEADQUARTERS.COST;
+    vm.barracksCost = $gameConstants.BARRACKS.COST;
   }
 
   function _createSoldier() {
@@ -37,10 +37,14 @@ function BarracksController($rootScope, $gameConstants, $mdDialog, $mdToast) {
   }
 
   function _showCreateSoldiersDialog() {
-
+    $mdDialog.show({
+      controller: _beforeFightDialogController,
+      templateUrl: 'directives/barracks/barracks.dialog.html',
+      clickOutsideToClose:true
+    });
   }
 
-  function _beforeFightDialogController($scope, $rootScope, $mdDialog, familyName, $mdToast) {
+  function _beforeFightDialogController($scope, $rootScope, $mdDialog) {
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
@@ -49,7 +53,10 @@ function BarracksController($rootScope, $gameConstants, $mdDialog, $mdToast) {
       if ($rootScope.game.totalGold < soldiersToTrain * $gameConstants.BARRACKS.TRAIN_COST) {
         _showSimpleToast('Not enough gold to train');
       } else {
-        
+        $rootScope.game.soldiers += soldiersToTrain;
+        $rootScope.game.totalGold -= soldiersToTrain * $gameConstants.BARRACKS.TRAIN_COST;
+        _showSimpleToast(soldiersToTrain + ' more soldiers ready to fight');
+        $mdDialog.hide();
       }
     };
   }

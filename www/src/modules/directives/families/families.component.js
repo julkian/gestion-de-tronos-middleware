@@ -35,7 +35,7 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog, $mdToast) {
   }
 
   /* BEFORE FIGHT DIALOG MANAGEMENT */
-  function _showBeforeFightDialog(ev, familyName) {
+  function _showBeforeFightDialog(familyName) {
     $mdDialog.show({
       controller: _beforeFightDialogController,
       templateUrl: 'directives/families/families.beforeFighting.dialog.html',
