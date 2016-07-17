@@ -30,6 +30,7 @@ function MarketController($rootScope, $gameConstants, saveGame) {
   function _lvlUpMarket() {
     $rootScope.game.buildings.market++;
     vm.marketDiscount = $gameConstants.MARKET[$rootScope.game.buildings.market + ''].SAVE_PERCENT;
+    vm.marketCost = $gameConstants.MARKET[$rootScope.game.buildings.market+1 + ''].COST;
     saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
   }
 }
