@@ -14,13 +14,17 @@ MarketController.$inject = ['$rootScope','$gameConstants', 'saveGame'];
 function MarketController($rootScope, $gameConstants, saveGame) {
   var vm = this;
   vm.lvlUpMarket = _lvlUpMarket;
+  vm.maxOut = false;
 
   initialize();
 
   /////////////////////
 
   function initialize() {
-    vm.marketCost = $gameConstants.MARKET[$rootScope.game.buildings.market+1 + ''].COST;
+    vm.maxOut = _checkMaxLevel();
+    if (!vm.maxOut) {
+      vm.marketCost = $gameConstants.MARKET[$rootScope.game.buildings.market+1 + ''].COST;
+    }
     if ($rootScope.game.buildings.market) {
       vm.marketDiscount = $gameConstants.MARKET[$rootScope.game.buildings.market + ''].SAVE_PERCENT;
     }
@@ -29,8 +33,18 @@ function MarketController($rootScope, $gameConstants, saveGame) {
   function _lvlUpMarket() {
     $rootScope.game.buildings.market++;
     vm.marketDiscount = $gameConstants.MARKET[$rootScope.game.buildings.market + ''].SAVE_PERCENT;
-    vm.marketCost = $gameConstants.MARKET[$rootScope.game.buildings.market+1 + ''].COST;
+    vm.maxOut = _checkMaxLevel();
+    if (!vm.maxOut) {
+      vm.marketCost = $gameConstants.MARKET[$rootScope.game.buildings.market+1 + ''].COST;
+    }
     saveGame.save({gameId: $rootScope.user.gameId}, $rootScope.game).$promise.then(function() {});
+  }
+
+  function _checkMaxLevel() {
+    if ($rootScope.game.buildings.market === Object.keys($gameConstants.MARKET).length) {
+      return true;
+    }
+    return false;
   }
 }
 

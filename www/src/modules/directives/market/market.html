@@ -29,10 +29,18 @@
   <md-card-actions layout="row" layout-align="end center" ng-if="game.buildings.market">
     <md-button
       md-no-ink
+      ng-if="!market.maxOut"
       ng-disabled="game.totalGold < market.marketCost"
       class="md-primary md-raised"
       ng-click="market.lvlUpMarket()">
       lvl up (cost {{market.marketCost}})
+    </md-button>
+    <md-button
+      md-no-ink
+      ng-if="market.maxOut"
+      ng-disabled="true"
+      class="md-primary md-raised">
+      Max level reached
     </md-button>
   </md-card-actions>
 </md-card>
