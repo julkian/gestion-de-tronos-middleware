@@ -47,7 +47,10 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog, $mdToast) {
   }
 
   function _beforeFightDialogController($scope, $rootScope, $mdDialog, familyName, $mdToast) {
-    var marketDiscount = $gameConstants.MARKET[$rootScope.game.buildings.market + ''].SAVE_PERCENT / 100;
+    var marketDiscount = 0;
+    if ($rootScope.game.buildings.market) {
+      marketDiscount = $gameConstants.MARKET[$rootScope.game.buildings.market + ''].SAVE_PERCENT / 100;
+    }
     $scope.familyGoldCost = parseInt($gameConstants.FAMILIES[familyName.toUpperCase()].COST * (1-marketDiscount));
     var familySoldiersCost = $gameConstants.FAMILIES[familyName.toUpperCase()].SOLDIERS;
     $scope.familyName = familyName;
