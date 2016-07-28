@@ -31,7 +31,7 @@ function HousesController($rootScope, $gameConstants, saveGame) {
 
   function _levelUpHouses() {
     var maxLevel = Object.keys($gameConstants.HOUSES).length;
-    if ($rootScope.game.buildings.houses <= maxLevel) {
+    if ($rootScope.game.buildings.houses <= maxLevel && $rootScope.game.totalGold < vm.housesCost) {
       $rootScope.game.totalGold -= vm.housesCost;
       $rootScope.game.buildings.houses++;
       $rootScope.game.goldRate = $gameConstants.HOUSES[$rootScope.game.buildings.houses + ''].GOLD_RATE;

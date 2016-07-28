@@ -77,6 +77,7 @@ function FamiliesController ($rootScope, $gameConstants, $mdDialog, $mdToast) {
             soldiersLost: parseInt((Math.random() / 2) * soldiersToRisk)
           });
         }
+        $rootScope.game.septonMultiplier = 0;
       }
     };
   }
